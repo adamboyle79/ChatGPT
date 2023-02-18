@@ -195,7 +195,7 @@
             </value>
         </assignmentItems>
         <connector>
-            <targetReference>Update_Campaign_Member_record</targetReference>
+            <targetReference>Post_Event_Survey_send</targetReference>
         </connector>
     </assignments>
     <assignments>
@@ -612,7 +612,6 @@
             <label>Generate Certificate</label>
         </rules>
     </decisions>
-    <environments>Default</environments>
     <interviewLabel>[CAMPAIGN_MEMBER] - EVENTS - SCREENFLOW - Post-event survey and certificate handling {!$Flow.CurrentDateTime}</interviewLabel>
     <label>[CAMPAIGN_MEMBER] - EVENTS - SCREENFLOW - Post-event survey and certificate (Conga) trigger update</label>
     <processMetadataValues>
@@ -659,7 +658,7 @@
         <name>Update_Campaign_Member_record</name>
         <label>Update Campaign Member record</label>
         <locationX>699</locationX>
-        <locationY>3542</locationY>
+        <locationY>3782</locationY>
         <inputReference>Input_Rec</inputReference>
     </recordUpdates>
     <runInMode>SystemModeWithoutSharing</runInMode>
@@ -877,7 +876,27 @@
             <targetReference>DEBUG_Is_INPUT_Rec_empty</targetReference>
         </connector>
     </start>
-    <status>Draft</status>
+    <status>Active</status>
+    <subflows>
+        <name>Post_Event_Survey_send</name>
+        <label>Post-Event Survey send</label>
+        <locationX>303</locationX>
+        <locationY>3446</locationY>
+        <flowName>SUBFLOW_EVENTS_CAMPAIGN_MEMBER_Post_Event_Survey_or_Certificate_send</flowName>
+        <inputAssignments>
+            <name>Input_CMem_Rec</name>
+            <value>
+                <elementReference>Input_Rec</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <name>ManualSendRequest</name>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </inputAssignments>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </subflows>
     <textTemplates>
         <name>InProgress_Survey</name>
         <isViewedAsPlainText>false</isViewedAsPlainText>

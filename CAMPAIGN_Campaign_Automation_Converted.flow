@@ -457,7 +457,6 @@
             <label>Face to Face</label>
         </rules>
     </decisions>
-    <environments>Default</environments>
     <formulas>
         <name>formula_myRule_1</name>
         <dataType>Boolean</dataType>

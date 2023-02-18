@@ -1,27 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata">
     <actionCalls>
-        <name>Send_Survey_Email</name>
-        <label>Send Survey Email</label>
-        <locationX>490</locationX>
-        <locationY>1214</locationY>
-        <actionName>CampaignMember.Event_Survey_email</actionName>
-        <actionType>emailAlert</actionType>
-        <connector>
-            <targetReference>Assign_Survey_Sent_Status</targetReference>
-        </connector>
-        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
-        <inputParameters>
-            <name>SObjectRowId</name>
-            <value>
-                <elementReference>Input_CMem_Rec.Id</elementReference>
-            </value>
-        </inputParameters>
-    </actionCalls>
-    <actionCalls>
         <name>Send_Survey_Email_SurveysOnly</name>
         <label>Send Survey Email</label>
-        <locationX>1722</locationX>
+        <locationX>50</locationX>
         <locationY>1214</locationY>
         <actionName>CampaignMember.Event_Survey_email</actionName>
         <actionType>emailAlert</actionType>
@@ -40,13 +22,13 @@
     <assignments>
         <name>Assign_CMem_Rec_ID</name>
         <label>Assign CMem_Rec ID</label>
-        <locationX>1507</locationX>
+        <locationX>778</locationX>
         <locationY>2054</locationY>
         <assignmentItems>
             <assignToReference>CMem_Rec.Id</assignToReference>
             <operator>Assign</operator>
             <value>
-                <elementReference>Get_CM.Id</elementReference>
+                <elementReference>Input_CMem_Rec.Id</elementReference>
             </value>
         </assignmentItems>
         <connector>
@@ -56,7 +38,7 @@
     <assignments>
         <name>Assign_record_details</name>
         <label>Assign record details</label>
-        <locationX>1507</locationX>
+        <locationX>778</locationX>
         <locationY>398</locationY>
         <assignmentItems>
             <assignToReference>Input_CMem_Rec</assignToReference>
@@ -73,66 +55,36 @@
             </value>
         </assignmentItems>
         <connector>
-            <targetReference>Receive_Certificate</targetReference>
+            <targetReference>Manual_Trigger_from_Screenflow_Resend_Survey</targetReference>
         </connector>
     </assignments>
     <assignments>
         <name>Assign_recordID</name>
         <label>Assign record details</label>
-        <locationX>1771</locationX>
-        <locationY>398</locationY>
-        <assignmentItems>
-            <assignToReference>Input_CMem_Rec</assignToReference>
-            <operator>Assign</operator>
-            <value>
-                <elementReference>Get_CM</elementReference>
-            </value>
-        </assignmentItems>
+        <locationX>1042</locationX>
+        <locationY>278</locationY>
         <assignmentItems>
             <assignToReference>recordId</assignToReference>
             <operator>Assign</operator>
             <value>
-                <elementReference>Get_CM.Id</elementReference>
+                <elementReference>Input_CMem_Rec.Id</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>Input_CMem_Rec</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Input_CMem_Rec</elementReference>
             </value>
         </assignmentItems>
         <connector>
-            <targetReference>Receive_Certificate</targetReference>
-        </connector>
-    </assignments>
-    <assignments>
-        <name>Assign_Survey_Sent_Status</name>
-        <label>Assign Survey Sent Status</label>
-        <locationX>490</locationX>
-        <locationY>1334</locationY>
-        <assignmentItems>
-            <assignToReference>Input_CMem_Rec.Status</assignToReference>
-            <operator>Assign</operator>
-            <value>
-                <stringValue>Survey Sent</stringValue>
-            </value>
-        </assignmentItems>
-        <assignmentItems>
-            <assignToReference>var_ChangesMade_Bool</assignToReference>
-            <operator>Assign</operator>
-            <value>
-                <booleanValue>true</booleanValue>
-            </value>
-        </assignmentItems>
-        <assignmentItems>
-            <assignToReference>Input_CMem_Rec.Manual_Trigger_Email_Survey__c</assignToReference>
-            <operator>Assign</operator>
-            <value>
-                <booleanValue>false</booleanValue>
-            </value>
-        </assignmentItems>
-        <connector>
-            <targetReference>Changes_to_be_applied</targetReference>
+            <targetReference>Manual_Trigger_from_Screenflow_Resend_Survey</targetReference>
         </connector>
     </assignments>
     <assignments>
         <name>Assign_Survey_Sent_Status_SurveysOnly</name>
         <label>Assign Survey Sent Status</label>
-        <locationX>1722</locationX>
+        <locationX>50</locationX>
         <locationY>1334</locationY>
         <assignmentItems>
             <assignToReference>Input_CMem_Rec.Status</assignToReference>
@@ -162,7 +114,7 @@
     <assignments>
         <name>Reset_Changes_Pending</name>
         <label>Reset Changes Pending</label>
-        <locationX>1639</locationX>
+        <locationX>910</locationX>
         <locationY>2390</locationY>
         <assignmentItems>
             <assignToReference>var_ChangesMade_Bool</assignToReference>
@@ -175,31 +127,8 @@
     <assignments>
         <name>Update_Conga_Trigger_field</name>
         <label>Update Conga Trigger field</label>
-        <locationX>50</locationX>
-        <locationY>1094</locationY>
-        <assignmentItems>
-            <assignToReference>Input_CMem_Rec.CT_TriggerEmailCertificate__c</assignToReference>
-            <operator>Assign</operator>
-            <value>
-                <booleanValue>true</booleanValue>
-            </value>
-        </assignmentItems>
-        <assignmentItems>
-            <assignToReference>var_ChangesMade_Bool</assignToReference>
-            <operator>Assign</operator>
-            <value>
-                <booleanValue>true</booleanValue>
-            </value>
-        </assignmentItems>
-        <connector>
-            <targetReference>Changes_to_be_applied</targetReference>
-        </connector>
-    </assignments>
-    <assignments>
-        <name>Update_Conga_Trigger_field_0_0</name>
-        <label>Update Conga Trigger field</label>
-        <locationX>1106</locationX>
-        <locationY>1094</locationY>
+        <locationX>1018</locationX>
+        <locationY>854</locationY>
         <assignmentItems>
             <assignToReference>Input_CMem_Rec.CT_TriggerEmailCertificate__c</assignToReference>
             <operator>Assign</operator>
@@ -221,7 +150,7 @@
     <decisions>
         <name>Changes_to_be_applied</name>
         <label>Changes to be applied?</label>
-        <locationX>1639</locationX>
+        <locationX>910</locationX>
         <locationY>1934</locationY>
         <defaultConnector>
             <targetReference>Reset_Changes_Pending</targetReference>
@@ -244,35 +173,10 @@
         </rules>
     </decisions>
     <decisions>
-        <name>Check_CMem_status_Attended</name>
-        <label>Check CMem status = Attended</label>
-        <locationX>1392</locationX>
-        <locationY>854</locationY>
-        <defaultConnector>
-            <targetReference>Changes_to_be_applied</targetReference>
-        </defaultConnector>
-        <defaultConnectorLabel>Other</defaultConnectorLabel>
-        <rules>
-            <name>CMem_Attended</name>
-            <conditionLogic>or</conditionLogic>
-            <conditions>
-                <leftValueReference>Input_CMem_Rec.Attended_Formula__c</leftValueReference>
-                <operator>EqualTo</operator>
-                <rightValue>
-                    <booleanValue>true</booleanValue>
-                </rightValue>
-            </conditions>
-            <connector>
-                <targetReference>CMem_Status_checkCert</targetReference>
-            </connector>
-            <label>Attended</label>
-        </rules>
-    </decisions>
-    <decisions>
         <name>CMem_Status_check_Campaign_Complete_TRUE_and_Cert_Opt_out_FALSE</name>
         <label>CMem Status check Campaign Complete = TRUE and Cert Opt-out = FALSE</label>
-        <locationX>182</locationX>
-        <locationY>974</locationY>
+        <locationX>1150</locationX>
+        <locationY>734</locationY>
         <defaultConnector>
             <targetReference>Changes_to_be_applied</targetReference>
         </defaultConnector>
@@ -294,6 +198,13 @@
                     <booleanValue>true</booleanValue>
                 </rightValue>
             </conditions>
+            <conditions>
+                <leftValueReference>Input_CMem_Rec.Forms_Surveys__r.Status__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Completed</stringValue>
+                </rightValue>
+            </conditions>
             <connector>
                 <targetReference>Update_Conga_Trigger_field</targetReference>
             </connector>
@@ -301,41 +212,9 @@
         </rules>
     </decisions>
     <decisions>
-        <name>CMem_Status_check_Survey_Opt_out_FALSE_and_Campaign_Completed_TRUE</name>
-        <label>CMem Status check - Survey Opt-out = FALSE and Campaign Completed = TRUE</label>
-        <locationX>776</locationX>
-        <locationY>974</locationY>
-        <defaultConnector>
-            <targetReference>Changes_to_be_applied</targetReference>
-        </defaultConnector>
-        <defaultConnectorLabel>Failed - Surveys NOT ok</defaultConnectorLabel>
-        <rules>
-            <name>Passed_surveys_OK</name>
-            <conditionLogic>and</conditionLogic>
-            <conditions>
-                <leftValueReference>Input_CMem_Rec.Survey_Opt_Out__c</leftValueReference>
-                <operator>EqualTo</operator>
-                <rightValue>
-                    <booleanValue>false</booleanValue>
-                </rightValue>
-            </conditions>
-            <conditions>
-                <leftValueReference>Input_CMem_Rec.Campaign_Completed__c</leftValueReference>
-                <operator>EqualTo</operator>
-                <rightValue>
-                    <booleanValue>true</booleanValue>
-                </rightValue>
-            </conditions>
-            <connector>
-                <targetReference>Email_and_Status_field_data_integrity_check</targetReference>
-            </connector>
-            <label>Passed - Surveys OK</label>
-        </rules>
-    </decisions>
-    <decisions>
         <name>CMem_Status_check_SurveysOnly</name>
         <label>CMem Status check</label>
-        <locationX>2008</locationX>
+        <locationX>336</locationX>
         <locationY>974</locationY>
         <defaultConnector>
             <targetReference>Changes_to_be_applied</targetReference>
@@ -365,48 +244,9 @@
         </rules>
     </decisions>
     <decisions>
-        <name>CMem_Status_checkCert</name>
-        <label>CMem Status check</label>
-        <locationX>1238</locationX>
-        <locationY>974</locationY>
-        <defaultConnector>
-            <targetReference>Changes_to_be_applied</targetReference>
-        </defaultConnector>
-        <defaultConnectorLabel>Failed - Certs NOT ok</defaultConnectorLabel>
-        <rules>
-            <name>Copy_1_of_Passed_Cert_OK</name>
-            <conditionLogic>and</conditionLogic>
-            <conditions>
-                <leftValueReference>Input_CMem_Rec.Certificate_Opt_Out__c</leftValueReference>
-                <operator>EqualTo</operator>
-                <rightValue>
-                    <booleanValue>false</booleanValue>
-                </rightValue>
-            </conditions>
-            <conditions>
-                <leftValueReference>Input_CMem_Rec.CT_TriggerEmailCertificate__c</leftValueReference>
-                <operator>EqualTo</operator>
-                <rightValue>
-                    <booleanValue>true</booleanValue>
-                </rightValue>
-            </conditions>
-            <conditions>
-                <leftValueReference>Input_CMem_Rec.Campaign_Completed__c</leftValueReference>
-                <operator>EqualTo</operator>
-                <rightValue>
-                    <booleanValue>true</booleanValue>
-                </rightValue>
-            </conditions>
-            <connector>
-                <targetReference>Update_Conga_Trigger_field_0_0</targetReference>
-            </connector>
-            <label>Passed - Cert OK</label>
-        </rules>
-    </decisions>
-    <decisions>
         <name>Copy_1_of_Check_CMem_status_Attended</name>
         <label>Check CMem status = Attended</label>
-        <locationX>2173</locationX>
+        <locationX>501</locationX>
         <locationY>854</locationY>
         <defaultConnector>
             <targetReference>Changes_to_be_applied</targetReference>
@@ -431,10 +271,10 @@
     <decisions>
         <name>Debug_Record_present</name>
         <label>DEBUG - Debug Record passed to flow?</label>
-        <locationX>1639</locationX>
+        <locationX>910</locationX>
         <locationY>158</locationY>
         <defaultConnector>
-            <targetReference>Get_CM</targetReference>
+            <targetReference>Assign_recordID</targetReference>
         </defaultConnector>
         <defaultConnectorLabel>No</defaultConnectorLabel>
         <rules>
@@ -454,17 +294,17 @@
         </rules>
     </decisions>
     <decisions>
-        <name>Email_and_Status_field_data_integrity_check</name>
+        <name>Email_send_data_requirements_check</name>
         <label>Email and Status field data integrity check</label>
-        <locationX>622</locationX>
+        <locationX>182</locationX>
         <locationY>1094</locationY>
         <defaultConnector>
             <targetReference>Changes_to_be_applied</targetReference>
         </defaultConnector>
         <defaultConnectorLabel>Failed</defaultConnectorLabel>
         <rules>
-            <name>Passed</name>
-            <conditionLogic>(1 OR 2) AND 3</conditionLogic>
+            <name>Passed_SurveysOnly</name>
+            <conditionLogic>(1 OR 2) AND 3 AND 4</conditionLogic>
             <conditions>
                 <leftValueReference>Input_CMem_Rec.Recipient_Email__c</leftValueReference>
                 <operator>IsNull</operator>
@@ -480,53 +320,14 @@
                 </rightValue>
             </conditions>
             <conditions>
+                <leftValueReference>Input_CMem_Rec.Campaign_Completed__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <conditions>
                 <leftValueReference>Input_CMem_Rec.Attended_Formula__c</leftValueReference>
-                <operator>EqualTo</operator>
-                <rightValue>
-                    <booleanValue>true</booleanValue>
-                </rightValue>
-            </conditions>
-            <connector>
-                <targetReference>Send_Survey_Email</targetReference>
-            </connector>
-            <label>Passed</label>
-        </rules>
-    </decisions>
-    <decisions>
-        <name>Email_send_data_requirements_check</name>
-        <label>Email and Status field data integrity check</label>
-        <locationX>1854</locationX>
-        <locationY>1094</locationY>
-        <defaultConnector>
-            <targetReference>Changes_to_be_applied</targetReference>
-        </defaultConnector>
-        <defaultConnectorLabel>Failed</defaultConnectorLabel>
-        <rules>
-            <name>Passed_SurveysOnly</name>
-            <conditionLogic>(1 OR 2) AND 3 AND 4</conditionLogic>
-            <conditions>
-                <leftValueReference>Get_CM.Recipient_Email__c</leftValueReference>
-                <operator>IsNull</operator>
-                <rightValue>
-                    <booleanValue>false</booleanValue>
-                </rightValue>
-            </conditions>
-            <conditions>
-                <leftValueReference>Get_CM.Post_Event_Survey_Link__c</leftValueReference>
-                <operator>IsNull</operator>
-                <rightValue>
-                    <booleanValue>false</booleanValue>
-                </rightValue>
-            </conditions>
-            <conditions>
-                <leftValueReference>Get_CM.Campaign_Completed__c</leftValueReference>
-                <operator>EqualTo</operator>
-                <rightValue>
-                    <booleanValue>true</booleanValue>
-                </rightValue>
-            </conditions>
-            <conditions>
-                <leftValueReference>Get_CM.Attended_Formula__c</leftValueReference>
                 <operator>EqualTo</operator>
                 <rightValue>
                     <booleanValue>true</booleanValue>
@@ -539,26 +340,26 @@
         </rules>
     </decisions>
     <decisions>
-        <name>Receive_Certificate</name>
-        <label>Receive Certificate?</label>
-        <locationX>1639</locationX>
+        <name>Manual_Trigger_from_Screenflow_Resend_Survey</name>
+        <label>Manual Trigger from Screenflow? (Resend Survey)</label>
+        <locationX>910</locationX>
         <locationY>614</locationY>
         <defaultConnector>
-            <targetReference>Receive_SurveysOnly</targetReference>
+            <targetReference>CMem_Status_check_Campaign_Complete_TRUE_and_Cert_Opt_out_FALSE</targetReference>
         </defaultConnector>
-        <defaultConnectorLabel>No (Manual Trigger of Survey)</defaultConnectorLabel>
+        <defaultConnectorLabel>No</defaultConnectorLabel>
         <rules>
-            <name>Yes</name>
+            <name>YesMan</name>
             <conditionLogic>and</conditionLogic>
             <conditions>
-                <leftValueReference>Input_CMem_Rec.Receive_Certificate__c</leftValueReference>
+                <leftValueReference>ManualSendRequest</leftValueReference>
                 <operator>EqualTo</operator>
                 <rightValue>
                     <booleanValue>true</booleanValue>
                 </rightValue>
             </conditions>
             <connector>
-                <targetReference>Survey_completion_required_before_Certificate_send</targetReference>
+                <targetReference>Receive_SurveysOnly</targetReference>
             </connector>
             <label>Yes</label>
         </rules>
@@ -566,7 +367,7 @@
     <decisions>
         <name>Receive_SurveysOnly</name>
         <label>Receive Surveys?</label>
-        <locationX>2343</locationX>
+        <locationX>671</locationX>
         <locationY>734</locationY>
         <defaultConnector>
             <targetReference>Changes_to_be_applied</targetReference>
@@ -595,71 +396,6 @@
             <label>Manually triggered</label>
         </rules>
     </decisions>
-    <decisions>
-        <name>Survey_Completed_CMEM_Status</name>
-        <label>Input Record received from</label>
-        <locationX>479</locationX>
-        <locationY>854</locationY>
-        <defaultConnector>
-            <targetReference>CMem_Status_check_Survey_Opt_out_FALSE_and_Campaign_Completed_TRUE</targetReference>
-        </defaultConnector>
-        <defaultConnectorLabel>Manual Trigger of Survey (CMEM Screenflow)</defaultConnectorLabel>
-        <rules>
-            <name>Survey_just_completed_Passed_from_Forms_Surveys_RT_Flow</name>
-            <conditionLogic>and</conditionLogic>
-            <conditions>
-                <leftValueReference>Input_CMem_Rec.Forms_Surveys__r.Status__c</leftValueReference>
-                <operator>EqualTo</operator>
-                <rightValue>
-                    <stringValue>Completed</stringValue>
-                </rightValue>
-            </conditions>
-            <conditions>
-                <leftValueReference>Input_CMem_Rec.Manual_Trigger_Email_Survey__c</leftValueReference>
-                <operator>EqualTo</operator>
-                <rightValue>
-                    <booleanValue>false</booleanValue>
-                </rightValue>
-            </conditions>
-            <connector>
-                <targetReference>CMem_Status_check_Campaign_Complete_TRUE_and_Cert_Opt_out_FALSE</targetReference>
-            </connector>
-            <label>Survey just completed (Passed from Forms/Surveys RT Flow)</label>
-        </rules>
-    </decisions>
-    <decisions>
-        <name>Survey_completion_required_before_Certificate_send</name>
-        <label>Survey completion required before Certificate send?</label>
-        <locationX>935</locationX>
-        <locationY>734</locationY>
-        <defaultConnector>
-            <targetReference>Check_CMem_status_Attended</targetReference>
-        </defaultConnector>
-        <defaultConnectorLabel>No</defaultConnectorLabel>
-        <rules>
-            <name>Survey_req_d</name>
-            <conditionLogic>and</conditionLogic>
-            <conditions>
-                <leftValueReference>Input_CMem_Rec.Receive_Survey__c</leftValueReference>
-                <operator>EqualTo</operator>
-                <rightValue>
-                    <booleanValue>true</booleanValue>
-                </rightValue>
-            </conditions>
-            <conditions>
-                <leftValueReference>Input_CMem_Rec.Receive_Certificate__c</leftValueReference>
-                <operator>EqualTo</operator>
-                <rightValue>
-                    <booleanValue>true</booleanValue>
-                </rightValue>
-            </conditions>
-            <connector>
-                <targetReference>Survey_Completed_CMEM_Status</targetReference>
-            </connector>
-            <label>Yes</label>
-        </rules>
-    </decisions>
-    <environments>Default</environments>
     <formulas>
         <name>FORM_TargetEmailField</name>
         <dataType>String</dataType>
@@ -690,30 +426,9 @@
     </processMetadataValues>
     <processType>AutoLaunchedFlow</processType>
     <recordLookups>
-        <name>Get_CM</name>
-        <label>Get CM</label>
-        <locationX>1771</locationX>
-        <locationY>278</locationY>
-        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
-        <connector>
-            <targetReference>Assign_recordID</targetReference>
-        </connector>
-        <filterLogic>and</filterLogic>
-        <filters>
-            <field>Id</field>
-            <operator>EqualTo</operator>
-            <value>
-                <elementReference>Input_CMem_Rec.Id</elementReference>
-            </value>
-        </filters>
-        <getFirstRecordOnly>true</getFirstRecordOnly>
-        <object>CampaignMember</object>
-        <storeOutputAutomatically>true</storeOutputAutomatically>
-    </recordLookups>
-    <recordLookups>
         <name>Get_CM_DEBUG</name>
         <label>Get CM DEBUG</label>
-        <locationX>1507</locationX>
+        <locationX>778</locationX>
         <locationY>278</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
@@ -734,7 +449,7 @@
     <recordUpdates>
         <name>Commit_changes_to_Campaign_Member</name>
         <label>Commit changes to Campaign Member</label>
-        <locationX>1507</locationX>
+        <locationX>778</locationX>
         <locationY>2174</locationY>
         <connector>
             <targetReference>Reset_Changes_Pending</targetReference>
@@ -743,7 +458,7 @@
     </recordUpdates>
     <runInMode>SystemModeWithoutSharing</runInMode>
     <start>
-        <locationX>1513</locationX>
+        <locationX>784</locationX>
         <locationY>0</locationY>
         <connector>
             <targetReference>Debug_Record_present</targetReference>

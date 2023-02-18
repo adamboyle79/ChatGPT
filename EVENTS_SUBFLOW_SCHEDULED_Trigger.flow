@@ -1121,7 +1121,6 @@
         </rules>
     </decisions>
     <description>Update Campaign rec to trigger Email/SMS Registration Reminder (Single Campaign) Subflow</description>
-    <environments>Default</environments>
     <formulas>
         <name>FiveFromNow_FORM</name>
         <dataType>DateTime</dataType>

@@ -771,7 +771,6 @@
             <label>3</label>
         </rules>
     </decisions>
-    <environments>Default</environments>
     <formulas>
         <name>FORM_AttendedFormula</name>
         <dataType>Boolean</dataType>

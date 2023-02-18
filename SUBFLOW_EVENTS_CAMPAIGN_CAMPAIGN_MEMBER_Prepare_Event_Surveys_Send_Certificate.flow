@@ -62,18 +62,6 @@
             <targetReference>Count_of_CMEM_records_with_missing_Forms_found</targetReference>
         </connector>
         <dataTypeMappings>
-            <typeName>T__sourceRecordCollection</typeName>
-            <typeValue>Formstack_Survey__c</typeValue>
-        </dataTypeMappings>
-        <dataTypeMappings>
-            <typeName>T__targetRecordCollection</typeName>
-            <typeValue>CampaignMember</typeValue>
-        </dataTypeMappings>
-        <dataTypeMappings>
-            <typeName>U__sourceCommonRecordCollection</typeName>
-            <typeValue>Formstack_Survey__c</typeValue>
-        </dataTypeMappings>
-        <dataTypeMappings>
             <typeName>U__sourceUniqueRecordCollection</typeName>
             <typeValue>Formstack_Survey__c</typeValue>
         </dataTypeMappings>
@@ -84,6 +72,18 @@
         <dataTypeMappings>
             <typeName>U__targetUniqueRecordCollection</typeName>
             <typeValue>CampaignMember</typeValue>
+        </dataTypeMappings>
+        <dataTypeMappings>
+            <typeName>T__sourceRecordCollection</typeName>
+            <typeValue>Formstack_Survey__c</typeValue>
+        </dataTypeMappings>
+        <dataTypeMappings>
+            <typeName>T__targetRecordCollection</typeName>
+            <typeValue>CampaignMember</typeValue>
+        </dataTypeMappings>
+        <dataTypeMappings>
+            <typeName>U__sourceCommonRecordCollection</typeName>
+            <typeValue>Formstack_Survey__c</typeValue>
         </dataTypeMappings>
         <faultConnector>
             <targetReference>Assign_ALL_CMEM_to_No_Forms_Record_Collection</targetReference>
@@ -235,15 +235,15 @@
             <targetReference>SemiFinal_CMEM_Collection_assignment</targetReference>
         </connector>
         <dataTypeMappings>
-            <typeName>U__outputCollection</typeName>
-            <typeValue>CampaignMember</typeValue>
-        </dataTypeMappings>
-        <dataTypeMappings>
             <typeName>T__inputCollection</typeName>
             <typeValue>CampaignMember</typeValue>
         </dataTypeMappings>
         <dataTypeMappings>
             <typeName>T__inputCollection2</typeName>
+            <typeValue>CampaignMember</typeValue>
+        </dataTypeMappings>
+        <dataTypeMappings>
+            <typeName>U__outputCollection</typeName>
             <typeValue>CampaignMember</typeValue>
         </dataTypeMappings>
         <flowTransactionModel>CurrentTransaction</flowTransactionModel>
@@ -908,13 +908,6 @@
         </assignmentItems>
         <assignmentItems>
             <assignToReference>var_CMemURLUpdatesPending_BOOL</assignToReference>
-            <operator>Assign</operator>
-            <value>
-                <booleanValue>true</booleanValue>
-            </value>
-        </assignmentItems>
-        <assignmentItems>
-            <assignToReference>Loop_1_Safe_SendervCampaign_Memberz.CT_TriggerEmailCertificate__c</assignToReference>
             <operator>Assign</operator>
             <value>
                 <booleanValue>true</booleanValue>
@@ -1788,7 +1781,6 @@
             <label>Safe Sender</label>
         </rules>
     </decisions>
-    <environments>Default</environments>
     <formulas>
         <name>Form_var_LeadSurveyURLExists</name>
         <dataType>Boolean</dataType>
@@ -2136,7 +2128,7 @@ FALSE
             <targetReference>Campaign_or_Campaign_Member_received_as_input</targetReference>
         </connector>
     </start>
-    <status>Draft</status>
+    <status>Active</status>
     <subflows>
         <name>Filter_to_Safe_Senders_Only</name>
         <label>Filter to Safe Senders Only</label>
@@ -2146,12 +2138,6 @@ FALSE
             <targetReference>Safe_Sender_CMEM_Count</targetReference>
         </connector>
         <flowName>SUBFLOW_CAMPAIGN_CAMPAIGN_MEMBER_Check_for_Opt_Outs</flowName>
-        <inputAssignments>
-            <name>DEBUGCampaign_Rec</name>
-            <value>
-                <elementReference>Input_Output_Campaign_Rec</elementReference>
-            </value>
-        </inputAssignments>
         <inputAssignments>
             <name>Input_CampaignMember_RecColl</name>
             <value>

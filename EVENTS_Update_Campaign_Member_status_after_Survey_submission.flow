@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata">
     <apiVersion>56.0</apiVersion>
-    <environments>Default</environments>
     <interviewLabel>EVENTS - Update Campaign Member status after Survey submission {!$Flow.CurrentDateTime} {!$User.Username}</interviewLabel>
     <label>EVENTS - Update Campaign Member status after Survey submission</label>
     <processMetadataValues>
@@ -135,9 +134,14 @@
                 <elementReference>Get_CMem_record_to_pass_to_subflow</elementReference>
             </value>
         </inputAssignments>
+        <inputAssignments>
+            <name>ManualSendRequest</name>
+            <value>
+                <booleanValue>false</booleanValue>
+            </value>
+        </inputAssignments>
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </subflows>
-    <triggerOrder>1</triggerOrder>
     <variables>
         <name>CampaignID</name>
         <dataType>String</dataType>
