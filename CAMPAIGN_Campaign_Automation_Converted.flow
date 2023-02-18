@@ -4,7 +4,7 @@
     <assignments>
         <name>Assign_Campaign_to_record_prior_record_vars</name>
         <label>Assign Campaign to record/prior record vars</label>
-        <locationX>564</locationX>
+        <locationX>732</locationX>
         <locationY>335</locationY>
         <assignmentItems>
             <assignToReference>MyRecordPrior</assignToReference>
@@ -27,7 +27,7 @@
     <assignments>
         <name>Assign_New_Existing_value_to_variable</name>
         <label>Assign New Record flag = True</label>
-        <locationX>432</locationX>
+        <locationX>600</locationX>
         <locationY>575</locationY>
         <assignmentItems>
             <assignToReference>NewRec_BOOLvar</assignToReference>
@@ -57,6 +57,59 @@
         </connector>
     </assignments>
     <assignments>
+        <name>Remove_Webinar_Link_on_Campaign</name>
+        <label>Remove Webinar Link on Campaign</label>
+        <locationX>754</locationX>
+        <locationY>2423</locationY>
+        <assignmentItems>
+            <assignToReference>MyRecordCurrent.FORMWebinarLink__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue></stringValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>CampaignUpdates_RecColl</assignToReference>
+            <operator>RemoveAll</operator>
+            <value>
+                <elementReference>MyRecordCurrent</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>CampaignUpdates_RecColl</assignToReference>
+            <operator>AddAtStart</operator>
+            <value>
+                <elementReference>MyRecordCurrent</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Campaign_updates_required</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>Set_Status_of_Campaign_to_Post_Event_Processing_Complete_TRUE</name>
+        <label>Set Status of Campaign to Post-Event Processing Complete = TRUE</label>
+        <locationX>886</locationX>
+        <locationY>2183</locationY>
+        <assignmentItems>
+            <assignToReference>MyRecordCurrent.PEProcessing_Complete__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>CampaignUpdates_RecColl</assignToReference>
+            <operator>AddAtStart</operator>
+            <value>
+                <elementReference>MyRecordCurrent</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Type_of_Event_Delivery</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
         <name>Update_Campaign_WebLink_with_RegForm_Weblink</name>
         <label>Update Campaign WebLink with RegForm Weblink</label>
         <locationX>50</locationX>
@@ -75,7 +128,7 @@
     <assignments>
         <name>Update_Reg_Form_dates</name>
         <label>Update Reg Form dates</label>
-        <locationX>253</locationX>
+        <locationX>270</locationX>
         <locationY>1607</locationY>
         <assignmentItems>
             <assignToReference>RegForm_Rec.dc__Start_Date__c</assignToReference>
@@ -102,10 +155,40 @@
             <targetReference>Update_dates_on_registration_form</targetReference>
         </connector>
     </assignments>
+    <assignments>
+        <name>Update_Webinar_Link_on_Campaign</name>
+        <label>Update Webinar Link on Campaign</label>
+        <locationX>1018</locationX>
+        <locationY>2423</locationY>
+        <assignmentItems>
+            <assignToReference>MyRecordCurrent.FORMWebinarLink__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>MyRecordCurrent.dc__Event__r.dc__Registration_Form__r.WebinarLink__c</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>CampaignUpdates_RecColl</assignToReference>
+            <operator>RemoveAll</operator>
+            <value>
+                <elementReference>MyRecordCurrent</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>CampaignUpdates_RecColl</assignToReference>
+            <operator>AddAtStart</operator>
+            <value>
+                <elementReference>MyRecordCurrent</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Campaign_updates_required</targetReference>
+        </connector>
+    </assignments>
     <decisions>
         <name>Assess_New_or_Existing_record</name>
         <label>Assess New or Existing record</label>
-        <locationX>564</locationX>
+        <locationX>732</locationX>
         <locationY>455</locationY>
         <defaultConnector>
             <targetReference>Is_the_Campaign_linked_to_an_Event</targetReference>
@@ -130,7 +213,7 @@
     <decisions>
         <name>Campaign_Post_Processing_Flag_ticked</name>
         <label>Campaign Post-Processing Complete = True?</label>
-        <locationX>385</locationX>
+        <locationX>402</locationX>
         <locationY>1943</locationY>
         <defaultConnector>
             <targetReference>Campaign_Status_updated_to_Completed</targetReference>
@@ -155,7 +238,7 @@
     <decisions>
         <name>Campaign_Receives_Cert_OR_Form</name>
         <label>Campaign Receives Cert OR Form?</label>
-        <locationX>462</locationX>
+        <locationX>446</locationX>
         <locationY>2183</locationY>
         <defaultConnector>
             <targetReference>Campaign_updates_required</targetReference>
@@ -187,10 +270,10 @@
     <decisions>
         <name>Campaign_Status_updated_to_Completed</name>
         <label>Campaign Status updated to Completed?</label>
-        <locationX>616</locationX>
+        <locationX>666</locationX>
         <locationY>2063</locationY>
         <defaultConnector>
-            <targetReference>Campaign_updates_required</targetReference>
+            <targetReference>Set_Status_of_Campaign_to_Post_Event_Processing_Complete_TRUE</targetReference>
         </defaultConnector>
         <defaultConnectorLabel>No</defaultConnectorLabel>
         <rules>
@@ -226,13 +309,6 @@
             <name>YesCUR</name>
             <conditionLogic>or</conditionLogic>
             <conditions>
-                <leftValueReference>MyRecordCurrent.FORMWebinarLink__c</leftValueReference>
-                <operator>WasSet</operator>
-                <rightValue>
-                    <booleanValue>true</booleanValue>
-                </rightValue>
-            </conditions>
-            <conditions>
                 <leftValueReference>CampaignUpdates_RecColl</leftValueReference>
                 <operator>IsNull</operator>
                 <rightValue>
@@ -240,7 +316,7 @@
                 </rightValue>
             </conditions>
             <connector>
-                <targetReference>Update_Webinar_Link_in_Campaign_0</targetReference>
+                <targetReference>Update_Campaign</targetReference>
             </connector>
             <label>Yes</label>
         </rules>
@@ -248,7 +324,7 @@
     <decisions>
         <name>Did_the_start_date_change</name>
         <label>Did the Event (Campaign) date change?</label>
-        <locationX>385</locationX>
+        <locationX>402</locationX>
         <locationY>1487</locationY>
         <defaultConnector>
             <targetReference>Campaign_Post_Processing_Flag_ticked</targetReference>
@@ -312,7 +388,7 @@
     <decisions>
         <name>Is_the_Campaign_linked_to_an_Event</name>
         <label>Is the Campaign linked to an Event?</label>
-        <locationX>564</locationX>
+        <locationX>732</locationX>
         <locationY>791</locationY>
         <defaultConnectorLabel>No</defaultConnectorLabel>
         <rules>
@@ -356,6 +432,31 @@
             <label>New record</label>
         </rules>
     </decisions>
+    <decisions>
+        <name>Type_of_Event_Delivery</name>
+        <label>Type of Event Delivery</label>
+        <locationX>886</locationX>
+        <locationY>2303</locationY>
+        <defaultConnector>
+            <targetReference>Update_Webinar_Link_on_Campaign</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Online</defaultConnectorLabel>
+        <rules>
+            <name>Face_to_Face</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>MyRecordCurrent.dc__Event__r.dc__Registration_Form__r.WebinarLink__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Remove_Webinar_Link_on_Campaign</targetReference>
+            </connector>
+            <label>Face to Face</label>
+        </rules>
+    </decisions>
     <environments>Default</environments>
     <formulas>
         <name>formula_myRule_1</name>
@@ -383,9 +484,16 @@
     </processMetadataValues>
     <processType>AutoLaunchedFlow</processType>
     <recordUpdates>
+        <name>Update_Campaign</name>
+        <label>Update Campaign</label>
+        <locationX>50</locationX>
+        <locationY>3047</locationY>
+        <inputReference>MyRecordCurrent</inputReference>
+    </recordUpdates>
+    <recordUpdates>
         <name>Update_Campaign_Member_to_Campaign_Complete_0_0_0</name>
         <label>Update CMEM Campaign Complete = TRUE</label>
-        <locationX>330</locationX>
+        <locationX>314</locationX>
         <locationY>2423</locationY>
         <connector>
             <targetReference>Campaign_updates_required</targetReference>
@@ -416,28 +524,15 @@
     <recordUpdates>
         <name>Update_dates_on_registration_form</name>
         <label>Update dates on registration form</label>
-        <locationX>253</locationX>
+        <locationX>270</locationX>
         <locationY>1727</locationY>
         <connector>
             <targetReference>Campaign_Post_Processing_Flag_ticked</targetReference>
         </connector>
         <inputReference>RegForm_Rec</inputReference>
     </recordUpdates>
-    <recordUpdates>
-        <name>Update_Webinar_Link_in_Campaign_0</name>
-        <label>Update Webinar Link in Campaign</label>
-        <locationX>50</locationX>
-        <locationY>3047</locationY>
-        <inputAssignments>
-            <field>FORMWebinarLink__c</field>
-            <value>
-                <elementReference>MyRecordCurrent.dc__Event__r.dc__Registration_Form__r.WebinarLink__c</elementReference>
-            </value>
-        </inputAssignments>
-        <inputReference>$Record</inputReference>
-    </recordUpdates>
     <start>
-        <locationX>438</locationX>
+        <locationX>606</locationX>
         <locationY>0</locationY>
         <connector>
             <targetReference>Assign_Campaign_to_record_prior_record_vars</targetReference>
@@ -450,7 +545,7 @@
     <subflows>
         <name>SUBFLOW_Prepare_Event_Surveys_Send_Cert</name>
         <label>SUBFLOW - Prepare Event Surveys/Send Cert</label>
-        <locationX>330</locationX>
+        <locationX>314</locationX>
         <locationY>2303</locationY>
         <connector>
             <targetReference>Update_Campaign_Member_to_Campaign_Complete_0_0_0</targetReference>
